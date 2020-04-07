@@ -1,0 +1,3 @@
+rootProject.name='VerificationEditText'
+include ':app'
+include ':verificationedittextlibrary'
