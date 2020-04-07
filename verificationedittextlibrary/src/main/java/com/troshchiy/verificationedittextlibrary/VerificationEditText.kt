@@ -12,4 +12,8 @@ class VerificationEditText @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    init {
+
+
+    }
 }
