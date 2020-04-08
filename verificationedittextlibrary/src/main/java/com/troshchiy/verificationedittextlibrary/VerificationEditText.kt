@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.AttributeSet
-import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout.END_ICON_CLEAR_TEXT
 
 
 fun colorStateListOf(@ColorInt color: Int): ColorStateList {
@@ -55,14 +55,14 @@ class VerificationEditText @JvmOverloads constructor(
     private val hintStateList = colorStateListOf(selectedColor)
     private val counterStateList = colorStateListOf(selectedColor)
 
-//    private val counterTextStateList = colorStateListOf(
-//        /* enabled */ intArrayOf(android.R.attr.state_enabled) to testColor,
-//        /* disabled */ intArrayOf(-android.R.attr.state_enabled) to testColor,
-//        /* unchecked */ intArrayOf(-android.R.attr.state_checked) to testColor,
-//        /* pressed */ intArrayOf(android.R.attr.state_pressed) to testColor
-//    )
+    private val endIconSelectedTintList = colorStateListOf(
+        /* enabled */ intArrayOf(android.R.attr.state_enabled) to selectedColor,
+        /* disabled */ intArrayOf(-android.R.attr.state_enabled) to selectedColor,
+        /* unchecked */ intArrayOf(-android.R.attr.state_checked) to selectedColor,
+        /* pressed */ intArrayOf(android.R.attr.state_pressed) to selectedColor
+    )
 
-    private val colorStateList = colorStateListOf(testColor)
+//    private val endIconTintList = colorStateListOf(selectedColor)
 
     init {
         inflate(context, R.layout.verification_edittext_widget, this)
@@ -85,17 +85,22 @@ class VerificationEditText @JvmOverloads constructor(
 //        textInputLayout.hintTextColor = hintStateList
 //        textInputLayout.counterOverflowTextColor = counterStateList
 
+        textInputLayout.endIconMode = END_ICON_CLEAR_TEXT
         textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
             setError("")
+            textInputLayout.isEndIconCheckable = true
+
+//            textInputLayout.endIconMode = END_ICON_CLEAR_TEXT
+            textInputLayout.setEndIconDrawable(R.drawable.ic_close)
         }
 
         textInputEditText = findViewById(R.id.textInputEditText)
 
-        textInputLayout.setEndIconOnClickListener {
-            textInputLayout.editText?.text = null
-
-            Toast.makeText(context, "Click on ICON", Toast.LENGTH_SHORT).show()
-        }
+//        textInputLayout.setEndIconOnClickListener {
+//            textInputLayout.editText?.text = null
+//
+//            Toast.makeText(context, "Click on ICON", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     fun setError(message: String) {
@@ -104,6 +109,10 @@ class VerificationEditText @JvmOverloads constructor(
 
     fun setSuccess() {
         setError("")
-        //TODO:
+
+        textInputLayout.isEndIconCheckable = false
+        textInputLayout.setEndIconTintList(endIconSelectedTintList)
+//        textInputLayout.endIconMode = END_ICON_CUSTOM
+        textInputLayout.setEndIconDrawable(R.drawable.ic_checkmark)
     }
 }

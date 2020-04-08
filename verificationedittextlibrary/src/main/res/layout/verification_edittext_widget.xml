@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:hint="Enter code"
         app:endIconDrawable="@drawable/ic_close"
-        app:endIconMode="custom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +26,8 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/cursor_color" />
     
     </com.google.android.material.textfield.TextInputLayout>
 

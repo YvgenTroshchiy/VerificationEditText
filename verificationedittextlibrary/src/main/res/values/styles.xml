@@ -11,10 +11,10 @@
     
     <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <!--        <item name="materialThemeOverlay">@style/ThemeOverlay.AppTheme.TextInputEditText.FilledBox.Dense</item>-->
-        <item name="boxStrokeColor">@color/selected</item>
-        <item name="hintTextColor">@color/selected</item>
-        <item name="errorTextColor">@color/tv_error</item>
-        <item name="colorControlActivated">@color/test</item>
+        <!--        <item name="boxStrokeColor">@color/selected</item>-->
+        <!--        <item name="hintTextColor">@color/selected</item>-->
+        <!--        <item name="errorTextColor">@color/tv_error</item>-->
+        <!--        <item name="colorControlActivated">@color/test</item>-->
     </style>
 
 </resources>
