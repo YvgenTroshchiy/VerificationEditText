@@ -1,9 +1,12 @@
 package com.troshchiy.verificationedittextlibrary
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -23,6 +26,8 @@ class VerificationEditText @JvmOverloads constructor(
 
         attrs?.let { initAttrs(it) }
         setupViews()
+
+        setSuccess()
     }
 
     private fun initAttrs(attrs: AttributeSet) {
@@ -32,11 +37,12 @@ class VerificationEditText @JvmOverloads constructor(
 
     private fun setupViews() {
         textInputLayout = findViewById(R.id.textInputLayout)
-        textInputEditText = findViewById(R.id.textInputEditText)
 
         textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
             setError("")
         }
+
+        textInputEditText = findViewById(R.id.textInputEditText)
     }
 
     fun setError(message: String) {
@@ -44,5 +50,35 @@ class VerificationEditText @JvmOverloads constructor(
     }
 
     fun setSuccess() {
+        setError("")
+
+        val states = arrayOf(
+            /* enabled */ intArrayOf(android.R.attr.state_enabled),
+            /* disabled */ intArrayOf(-android.R.attr.state_enabled),
+            /* unchecked */ intArrayOf(-android.R.attr.state_checked),
+            /* pressed */ intArrayOf(android.R.attr.state_pressed)
+        )
+
+//        val colors = intArrayOf(
+//            /* enabled */ Color.BLACK,
+//            /* disabled */ Color.RED,
+//            /* unchecked */ Color.GREEN,
+//            /* pressed */ Color.BLUE
+//        )
+
+        val colors = intArrayOf(
+            /* enabled */ Color.BLUE,
+            /* disabled */ Color.BLUE,
+            /* unchecked */ Color.BLUE,
+            /* pressed */ Color.BLUE
+        )
+
+        val testColor = ContextCompat.getColor(context, R.color.test)
+        val colorStateList = ColorStateList(states, colors)
+
+//        textInputLayout.boxStrokeColor = testColor // Selected stroke color
+//        textInputLayout.counterTextColor = colorStateList
+        textInputLayout.counterOverflowTextColor = colorStateList
+
     }
 }
