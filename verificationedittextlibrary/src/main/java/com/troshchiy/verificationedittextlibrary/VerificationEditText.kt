@@ -2,7 +2,6 @@ package com.troshchiy.verificationedittextlibrary
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
@@ -28,6 +27,12 @@ class VerificationEditText @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     @AttrRes defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+
+    var helperText: String = ""
+        set(value) {
+            field = value
+            textInputLayout.helperText = field
+        }
 
     private lateinit var textInputLayout: TextInputLayout
     private lateinit var textInputEditText: TextInputEditText
@@ -72,6 +77,8 @@ class VerificationEditText @JvmOverloads constructor(
             setError(null)
             textInputLayout.isEndIconCheckable = true
             textInputLayout.setEndIconDrawable(R.drawable.ic_close)
+
+            textInputLayout.helperText = null
         }
 
         textInputEditText = findViewById(R.id.textInputEditText)

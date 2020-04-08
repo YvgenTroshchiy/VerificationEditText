@@ -17,5 +17,8 @@ class MainActivity : AppCompatActivity() {
         btn_success.setOnClickListener {
             verificationEditText.setSuccess()
         }
+
+        val message = "All set! This promo has been applied to all eligible items."
+
     }
 }

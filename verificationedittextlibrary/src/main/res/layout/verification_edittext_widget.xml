@@ -11,8 +11,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter code"
-        app:endIconDrawable="@drawable/ic_close"
+        android:hint="Promo code"
+        app:endIconDrawable="@drawable/ic_checkmark"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,10 +25,13 @@
             android:id="@+id/textInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Enter code"
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="Big text. Some more big text." />
+            android:text="Big text. Some more big text."
+            android:textColorHint="@drawable/hint_selector"
+            android:textCursorDrawable="@drawable/cursor_color" />
         <!-- todo: move android:text to tools -->
     
     </com.google.android.material.textfield.TextInputLayout>
