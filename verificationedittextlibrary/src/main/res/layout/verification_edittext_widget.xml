@@ -11,7 +11,7 @@
         style="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Promo code"
+        android:hint="Enter code"
         app:endIconDrawable="@drawable/ic_close"
         app:endIconMode="custom"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,8 +27,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:maxLines="1"
-            android:singleLine="true"
-            android:text="Big text. Some more big text." />
+            android:singleLine="true" />
     
     </com.google.android.material.textfield.TextInputLayout>
 
