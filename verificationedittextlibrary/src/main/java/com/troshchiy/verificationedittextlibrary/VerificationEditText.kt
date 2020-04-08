@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.AttributeSet
+import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -45,10 +46,21 @@ class VerificationEditText @JvmOverloads constructor(
         /* pressed */ Color.BLUE
     )
 
+    private val normalColor = ContextCompat.getColor(context, R.color.normal)
+    private val selectedColor = ContextCompat.getColor(context, R.color.selected)
     private val errorColor = ContextCompat.getColor(context, R.color.tv_error)
     private val testColor = ContextCompat.getColor(context, R.color.test)
 
     private val errorStateList = colorStateListOf(errorColor)
+    private val hintStateList = colorStateListOf(selectedColor)
+    private val counterStateList = colorStateListOf(selectedColor)
+
+//    private val counterTextStateList = colorStateListOf(
+//        /* enabled */ intArrayOf(android.R.attr.state_enabled) to testColor,
+//        /* disabled */ intArrayOf(-android.R.attr.state_enabled) to testColor,
+//        /* unchecked */ intArrayOf(-android.R.attr.state_checked) to testColor,
+//        /* pressed */ intArrayOf(android.R.attr.state_pressed) to testColor
+//    )
 
     private val colorStateList = colorStateListOf(testColor)
 
@@ -57,8 +69,6 @@ class VerificationEditText @JvmOverloads constructor(
 
         attrs?.let { initAttrs(it) }
         setupViews()
-
-        setSuccess()
     }
 
     private fun initAttrs(attrs: AttributeSet) {
@@ -69,13 +79,23 @@ class VerificationEditText @JvmOverloads constructor(
     private fun setupViews() {
         textInputLayout = findViewById(R.id.textInputLayout)
 
-        textInputLayout.setErrorTextColor(errorStateList)
+//        textInputLayout.setErrorTextColor(errorStateList)
+//        textInputLayout.boxStrokeColor = selectedColor
+//
+//        textInputLayout.hintTextColor = hintStateList
+//        textInputLayout.counterOverflowTextColor = counterStateList
 
         textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
             setError("")
         }
 
         textInputEditText = findViewById(R.id.textInputEditText)
+
+        textInputLayout.setEndIconOnClickListener {
+            textInputLayout.editText?.text = null
+
+            Toast.makeText(context, "Click on ICON", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun setError(message: String) {
@@ -84,11 +104,6 @@ class VerificationEditText @JvmOverloads constructor(
 
     fun setSuccess() {
         setError("")
-
-
-//        textInputLayout.boxStrokeColor = testColor // Selected stroke color
-//        textInputLayout.counterTextColor = colorStateList
-        textInputLayout.counterOverflowTextColor = colorStateList
-
+        //TODO:
     }
 }

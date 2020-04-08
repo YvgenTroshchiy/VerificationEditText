@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Library -->
+    
+    <style name="TextInputLayoutAppearance1" parent="Widget.Design.TextInputLayout"></style>
+    
+    <style name="ThemeOverlay.AppTheme.TextInputEditText.FilledBox.Dense" parent="ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox.Dense">
+        <item name="colorPrimary">@color/test</item>
+        <item name="colorControlActivated">@color/test</item>
+    </style>
+    
+    <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.AppTheme.TextInputEditText.FilledBox.Dense</item>
+        <!--        <item name="boxStrokeColor">@color/selected</item>-->
+        <!--        <item name="hintTextColor">@color/selected</item>-->
+        <!--        <item name="errorTextColor">@color/tv_error</item>-->
+        <!--        <item name="colorControlActivated">@color/test</item>-->
+    </style>
+
+</resources>
