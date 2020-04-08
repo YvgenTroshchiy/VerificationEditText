@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -14,8 +15,8 @@ class VerificationEditText @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private var textInputLayout: TextInputLayout? = null
-    private var textInputEditText: TextInputEditText? = null
+    private lateinit var textInputLayout: TextInputLayout
+    private lateinit var textInputEditText: TextInputEditText
 
     init {
         inflate(context, R.layout.verification_edittext_widget, this)
@@ -32,10 +33,14 @@ class VerificationEditText @JvmOverloads constructor(
     private fun setupViews() {
         textInputLayout = findViewById(R.id.textInputLayout)
         textInputEditText = findViewById(R.id.textInputEditText)
+
+        textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
+            setError("")
+        }
     }
 
     fun setError(message: String) {
-        textInputLayout?.error = message
+        textInputLayout.error = message
     }
 
     fun setSuccess() {
