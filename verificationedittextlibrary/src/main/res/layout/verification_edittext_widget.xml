@@ -8,11 +8,12 @@
     
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        style="@style/TextInputLayoutAppearance"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter code"
         app:endIconDrawable="@drawable/ic_close"
+        app:endIconMode="clear_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +28,8 @@
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true"
-            android:textCursorDrawable="@drawable/cursor_color" />
+            android:text="Big text. Some more big text." />
+        <!-- todo: move android:text to tools -->
     
     </com.google.android.material.textfield.TextInputLayout>
 
