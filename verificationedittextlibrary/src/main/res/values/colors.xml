@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <color name="normal">#999999</color>
-    <color name="error">#DF2F07</color>
+    <color name="tv_error">#DF2F07</color> <!-- with just error doesn't compile -->
     <color name="selected">#1FA597</color>
-
-    //TODO: delete
+    
+    <!-- todo: debug, delete -->
     <color name="test">#FFEB3B</color>
 
 </resources>

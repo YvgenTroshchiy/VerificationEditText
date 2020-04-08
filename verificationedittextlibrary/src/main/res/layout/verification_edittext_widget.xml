@@ -5,7 +5,7 @@
     android:id="@+id/layout_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
+    
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:hint="Promo code"
         app:endIconDrawable="@drawable/ic_cross"
-        app:endIconMode="clear_text"
+        app:endIconMode="custom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText,RtlSymmetry">
-
+        
         <!-- text -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText"
@@ -29,7 +29,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:text="Big text. Some more big text." />
-
+    
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
