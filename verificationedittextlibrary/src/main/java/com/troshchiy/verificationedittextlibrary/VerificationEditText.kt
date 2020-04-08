@@ -34,11 +34,10 @@ class VerificationEditText @JvmOverloads constructor(
         textInputEditText = findViewById(R.id.textInputEditText)
     }
 
-    fun setSuccess() {
-
+    fun setError(message: String) {
+        textInputLayout?.error = message
     }
 
-    fun setError(message: String) {
-
+    fun setSuccess() {
     }
 }
