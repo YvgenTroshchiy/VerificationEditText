@@ -2,6 +2,7 @@ package com.troshchiy.verificationedittextlibrary
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.os.Handler
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
@@ -29,6 +30,8 @@ class VerificationEditText @JvmOverloads constructor(
 
     val text: String
         get() = textInputLayout.editText?.text.toString()
+
+    private val debounceHandler = Handler()
 
     private lateinit var textInputLayout: TextInputLayout
 
@@ -69,17 +72,20 @@ class VerificationEditText @JvmOverloads constructor(
     private fun setupViews() {
         textInputLayout = findViewById(R.id.textInputLayout)
 
-        setGrayStyle()
+        setInitialStyle()
 
         textInputLayout.setErrorTextColor(redStateList)
 
         textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
-            setError(null)
-            if (after > 0) {
-                setGrayStyle()
-            } else {
-                textInputLayout.endIconDrawable = null
-            }
+            debounceHandler.removeCallbacks(null)
+            debounceHandler.postDelayed({
+                setError(null)
+                if (after > 0) {
+                    setDefaultStyle()
+                } else {
+                    textInputLayout.endIconDrawable = null
+                }
+            }, 400)
         }
     }
 
@@ -90,12 +96,21 @@ class VerificationEditText @JvmOverloads constructor(
     fun setSuccessState(message: String?) {
         setError(null)
 
-        setGreenStyle()
+        setSuccessStyle()
 
         textInputLayout.helperText = message
     }
 
-    private fun setGrayStyle() {
+    private fun setInitialStyle() {
+        textInputLayout.boxStrokeColor = greenColor
+        textInputLayout.hintTextColor = greenHintStateList
+
+        textInputLayout.setEndIconTintList(greenEndIconTintList)
+
+        textInputLayout.helperText = null
+    }
+
+    private fun setDefaultStyle() {
         textInputLayout.boxStrokeColor = greenColor
         textInputLayout.hintTextColor = greenHintStateList
 
@@ -105,7 +120,7 @@ class VerificationEditText @JvmOverloads constructor(
         textInputLayout.helperText = null
     }
 
-    private fun setGreenStyle() {
+    private fun setSuccessStyle() {
         textInputLayout.boxStrokeColor = grayColor
         textInputLayout.hintTextColor = grayHintStateList
 

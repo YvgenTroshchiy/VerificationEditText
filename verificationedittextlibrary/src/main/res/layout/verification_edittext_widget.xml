@@ -28,7 +28,6 @@
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="promocode"
             android:textColorHint="@drawable/hint_selector"
             android:textCursorDrawable="@drawable/cursor_color" />
     
