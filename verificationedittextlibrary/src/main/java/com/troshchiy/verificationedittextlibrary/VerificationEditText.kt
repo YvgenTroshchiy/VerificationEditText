@@ -142,6 +142,10 @@ class VerificationEditText @JvmOverloads constructor(
     }
 
     fun enableLoading() {
+        setError(null)
+        textInputLayout.endIconDrawable = null
+        textInputLayout.helperText = null
+
         textInputLayout.isEnabled = false
         progressBar.visibility = View.VISIBLE
     }
