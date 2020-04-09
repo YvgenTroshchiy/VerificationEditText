@@ -31,9 +31,6 @@ class VerificationEditText @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    val text: String
-        get() = textInputLayout.editText?.text.toString()
-
     private val debounceHandler = Handler()
 
     private lateinit var textInputLayout: TextInputLayout
@@ -60,6 +57,13 @@ class VerificationEditText @JvmOverloads constructor(
         intArrayOf(android.R.attr.state_enabled) to greenColor,
         intArrayOf(-android.R.attr.state_enabled) to grayColor
     )
+
+    var text: String = ""
+        private set
+        get() = textInputLayout.editText?.text.toString()
+
+    var isCodeApplied: Boolean = false
+        private set
 
     init {
         inflate(context, R.layout.verification_edittext_widget, this)
@@ -100,11 +104,15 @@ class VerificationEditText @JvmOverloads constructor(
     }
 
     fun setError(message: String?) {
+        isCodeApplied = false
+
         disableLoading()
         textInputLayout.error = message
     }
 
-    fun setSuccessState(message: String?) {
+    fun setSuccess(message: String?) {
+        isCodeApplied = true
+
         disableLoading()
 
         setError(null)
@@ -141,7 +149,7 @@ class VerificationEditText @JvmOverloads constructor(
         textInputLayout.setEndIconDrawable(R.drawable.ic_close)
     }
 
-    fun enableLoading() {
+    fun setLoading() {
         setError(null)
         textInputLayout.endIconDrawable = null
         textInputLayout.helperText = null

@@ -12,14 +12,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btn_loading.setOnClickListener {
-            verificationEditText.enableLoading()
+            verificationEditText.setLoading()
         }
         btn_error.setOnClickListener {
             verificationEditText.setError("Some error message")
         }
         btn_success.setOnClickListener {
             val message = "All set! This promo has been applied to all eligible items."
-            verificationEditText.setSuccessState(message)
+            verificationEditText.setSuccess(message)
         }
     }
 }
