@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
         }
 
+        btn_initial.setOnClickListener {
+            //TODO:
+        }
         btn_loading.setOnClickListener {
             verificationEditText.setLoading()
         }
