@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_initial.setOnClickListener {
-            //TODO:
+            verificationEditText.clear()
         }
         btn_loading.setOnClickListener {
             verificationEditText.setLoading()

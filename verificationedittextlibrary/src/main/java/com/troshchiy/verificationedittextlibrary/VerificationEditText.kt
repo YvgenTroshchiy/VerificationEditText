@@ -77,7 +77,7 @@ class VerificationEditText @JvmOverloads constructor(
     private fun setupViews() {
         textInputLayout = findViewById(R.id.textInputLayout)
 
-        setInitialStyle()
+        setDefaultStyle()
 
         textInputLayout.setErrorTextColor(redStateList)
 
@@ -88,6 +88,7 @@ class VerificationEditText @JvmOverloads constructor(
 
             if (after > 0) {
                 setDefaultStyle()
+                textInputLayout.setEndIconDrawable(R.drawable.ic_checkmark)
             } else {
                 textInputLayout.endIconDrawable = null
             }
@@ -107,6 +108,13 @@ class VerificationEditText @JvmOverloads constructor(
         progressBar = findViewById(R.id.progressBar)
     }
 
+    fun clear() {
+        setError(null)
+        setDefaultStyle()
+        textInputLayout.editText?.text = null
+        textInputLayout.endIconDrawable = null
+    }
+
     fun setError(message: String?) {
         isCodeApplied = false
 
@@ -124,21 +132,11 @@ class VerificationEditText @JvmOverloads constructor(
         textInputLayout.helperText = message
     }
 
-    private fun setInitialStyle() {
-        textInputLayout.boxStrokeColor = greenColor
-        textInputLayout.hintTextColor = greenHintStateList
-
-        textInputLayout.setEndIconTintList(greenEndIconTintList)
-
-        textInputLayout.helperText = null
-    }
-
     private fun setDefaultStyle() {
         textInputLayout.boxStrokeColor = greenColor
         textInputLayout.hintTextColor = greenHintStateList
 
         textInputLayout.setEndIconTintList(greenEndIconTintList)
-        textInputLayout.setEndIconDrawable(R.drawable.ic_checkmark)
 
         textInputLayout.helperText = null
     }
