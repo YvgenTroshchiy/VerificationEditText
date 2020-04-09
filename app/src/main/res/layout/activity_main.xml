@@ -31,6 +31,17 @@
         app:layout_constraintTop_toBottomOf="@+id/edt" />
     
     <Button
+        android:id="@+id/btn_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="Start loading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verificationEditText"
+        tools:ignore="HardcodedText" />
+    
+    <Button
         android:id="@+id/btn_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +50,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_success"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verificationEditText"
+        app:layout_constraintTop_toBottomOf="@+id/btn_loading"
         tools:ignore="HardcodedText" />
     
     <Button

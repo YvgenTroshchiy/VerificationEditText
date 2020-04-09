@@ -11,6 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        btn_loading.setOnClickListener {
+            verificationEditText.enableLoading()
+        }
         btn_error.setOnClickListener {
             verificationEditText.setError("Some error message")
         }

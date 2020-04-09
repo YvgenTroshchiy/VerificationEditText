@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Handler
 import android.util.AttributeSet
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +37,7 @@ class VerificationEditText @JvmOverloads constructor(
     private val debounceHandler = Handler()
 
     private lateinit var textInputLayout: TextInputLayout
+    private lateinit var progressBar: ProgressBar
 
     private val grayColor = ContextCompat.getColor(context, R.color.gray)
     private val greenColor = ContextCompat.getColor(context, R.color.green)
@@ -77,23 +81,32 @@ class VerificationEditText @JvmOverloads constructor(
         textInputLayout.setErrorTextColor(redStateList)
 
         textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
-            debounceHandler.removeCallbacks(null)
-            debounceHandler.postDelayed({
-                setError(null)
-                if (after > 0) {
-                    setDefaultStyle()
-                } else {
-                    textInputLayout.endIconDrawable = null
-                }
-            }, 400)
+//            debounceHandler.removeCallbacks(null)
+//            debounceHandler.postDelayed({
+            setError(null)
+            if (after > 0) {
+                setDefaultStyle()
+            } else {
+                textInputLayout.endIconDrawable = null
+            }
+//            }, 400)
         }
+
+        textInputLayout.setEndIconOnClickListener {
+            Toast.makeText(context, "setEndIconOnClickListener", Toast.LENGTH_SHORT).show()
+        }
+
+        progressBar = findViewById(R.id.progressBar)
     }
 
     fun setError(message: String?) {
+        disableLoading()
         textInputLayout.error = message
     }
 
     fun setSuccessState(message: String?) {
+        disableLoading()
+
         setError(null)
 
         setSuccessStyle()
@@ -126,5 +139,15 @@ class VerificationEditText @JvmOverloads constructor(
 
         textInputLayout.setEndIconTintList(grayEndIconTintList)
         textInputLayout.setEndIconDrawable(R.drawable.ic_close)
+    }
+
+    fun enableLoading() {
+        textInputLayout.isEnabled = false
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun disableLoading() {
+        textInputLayout.isEnabled = true
+        progressBar.visibility = View.GONE
     }
 }

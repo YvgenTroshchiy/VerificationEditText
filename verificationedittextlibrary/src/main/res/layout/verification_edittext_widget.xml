@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_holder"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:background="#BCB9B9">
     
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -17,6 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:background="#EFC0C0"
         tools:ignore="HardcodedText,RtlSymmetry">
         
         <!-- text -->
@@ -32,5 +34,19 @@
             android:textCursorDrawable="@drawable/cursor_color" />
     
     </com.google.android.material.textfield.TextInputLayout>
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="3.2dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/green"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
