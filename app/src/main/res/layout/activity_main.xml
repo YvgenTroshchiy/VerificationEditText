@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+    
     <EditText
         android:id="@+id/edt"
         android:layout_width="0dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
-
+    
     <com.troshchiy.verificationedittextlibrary.VerificationEditText
         android:id="@+id/verificationEditText"
         android:layout_width="0dp"
@@ -29,24 +29,24 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt" />
-
+    
     <Button
         android:id="@+id/btn_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Error"
+        android:text="Set Error State"
         app:layout_constraintEnd_toStartOf="@+id/btn_success"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verificationEditText"
         tools:ignore="HardcodedText" />
-
+    
     <Button
         android:id="@+id/btn_success"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Success"
+        android:text="Set Success State"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_error"
         app:layout_constraintTop_toTopOf="@id/btn_error"

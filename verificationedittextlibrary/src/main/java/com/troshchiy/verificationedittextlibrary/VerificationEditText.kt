@@ -8,7 +8,6 @@ import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 
@@ -28,30 +27,31 @@ class VerificationEditText @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var helperText: String = ""
-        set(value) {
-            field = value
-            textInputLayout.helperText = field
-        }
+    val text: String
+        get() = textInputLayout.editText?.text.toString()
 
     private lateinit var textInputLayout: TextInputLayout
-    private lateinit var textInputEditText: TextInputEditText
 
-    private val normalColor = ContextCompat.getColor(context, R.color.normal)
-    private val selectedColor = ContextCompat.getColor(context, R.color.selected)
-    private val errorColor = ContextCompat.getColor(context, R.color.tv_error)
+    private val grayColor = ContextCompat.getColor(context, R.color.gray)
+    private val greenColor = ContextCompat.getColor(context, R.color.green)
+    private val redColor = ContextCompat.getColor(context, R.color.red)
 
-    //TODO: delete
-    private val testColor = ContextCompat.getColor(context, R.color.test)
+    private val grayHintStateList = colorStateListOf(grayColor)
+    private val greenHintStateList = colorStateListOf(greenColor)
+    private val redStateList = colorStateListOf(redColor)
 
-    private val hintStateList = colorStateListOf(selectedColor)
-    private val errorStateList = colorStateListOf(errorColor)
+    private val grayEndIconTintList = colorStateListOf(
+        intArrayOf(android.R.attr.state_focused) to grayColor,
+        intArrayOf(-android.R.attr.state_focused) to grayColor,
+        intArrayOf(android.R.attr.state_enabled) to grayColor,
+        intArrayOf(-android.R.attr.state_enabled) to grayColor
+    )
 
-    private val endIconSelectedTintList = colorStateListOf(
-        /* enabled */ intArrayOf(android.R.attr.state_enabled) to selectedColor,
-        /* disabled */ intArrayOf(-android.R.attr.state_enabled) to selectedColor,
-        /* unchecked */ intArrayOf(-android.R.attr.state_checked) to selectedColor,
-        /* pressed */ intArrayOf(android.R.attr.state_pressed) to selectedColor
+    private val greenEndIconTintList = colorStateListOf(
+        intArrayOf(android.R.attr.state_focused) to greenColor,
+        intArrayOf(-android.R.attr.state_focused) to greenColor,
+        intArrayOf(android.R.attr.state_enabled) to greenColor,
+        intArrayOf(-android.R.attr.state_enabled) to grayColor
     )
 
     init {
@@ -69,29 +69,47 @@ class VerificationEditText @JvmOverloads constructor(
     private fun setupViews() {
         textInputLayout = findViewById(R.id.textInputLayout)
 
-        textInputLayout.hintTextColor = hintStateList
-        textInputLayout.boxStrokeColor = selectedColor
-        textInputLayout.setErrorTextColor(errorStateList)
+        setGrayStyle()
+
+        textInputLayout.setErrorTextColor(redStateList)
 
         textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
             setError(null)
-            textInputLayout.isEndIconCheckable = true
-            textInputLayout.setEndIconDrawable(R.drawable.ic_close)
-
-            textInputLayout.helperText = null
+            if (after > 0) {
+                setGrayStyle()
+            } else {
+                textInputLayout.endIconDrawable = null
+            }
         }
-
-        textInputEditText = findViewById(R.id.textInputEditText)
     }
 
     fun setError(message: String?) {
         textInputLayout.error = message
     }
 
-    fun setSuccess() {
+    fun setSuccessState(message: String?) {
         setError(null)
-        textInputLayout.isEndIconCheckable = false
-        textInputLayout.setEndIconTintList(endIconSelectedTintList)
+
+        setGreenStyle()
+
+        textInputLayout.helperText = message
+    }
+
+    private fun setGrayStyle() {
+        textInputLayout.boxStrokeColor = greenColor
+        textInputLayout.hintTextColor = greenHintStateList
+
+        textInputLayout.setEndIconTintList(greenEndIconTintList)
         textInputLayout.setEndIconDrawable(R.drawable.ic_checkmark)
+
+        textInputLayout.helperText = null
+    }
+
+    private fun setGreenStyle() {
+        textInputLayout.boxStrokeColor = grayColor
+        textInputLayout.hintTextColor = grayHintStateList
+
+        textInputLayout.setEndIconTintList(grayEndIconTintList)
+        textInputLayout.setEndIconDrawable(R.drawable.ic_close)
     }
 }
