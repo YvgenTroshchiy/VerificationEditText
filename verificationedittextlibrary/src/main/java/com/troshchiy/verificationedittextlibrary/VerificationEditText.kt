@@ -6,7 +6,6 @@ import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +29,11 @@ class VerificationEditText @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     @AttrRes defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+
+    var onApplyCodeClick: (String) -> Unit = {}
+    var onDeleteCodeClick: () -> Unit = {}
+
+    private var isCodeApplied: Boolean = false
 
     private val debounceHandler = Handler()
 
@@ -58,13 +62,6 @@ class VerificationEditText @JvmOverloads constructor(
         intArrayOf(-android.R.attr.state_enabled) to grayColor
     )
 
-    var text: String = ""
-        private set
-        get() = textInputLayout.editText?.text.toString()
-
-    var isCodeApplied: Boolean = false
-        private set
-
     init {
         inflate(context, R.layout.verification_edittext_widget, this)
 
@@ -88,6 +85,7 @@ class VerificationEditText @JvmOverloads constructor(
 //            debounceHandler.removeCallbacks(null)
 //            debounceHandler.postDelayed({
             setError(null)
+
             if (after > 0) {
                 setDefaultStyle()
             } else {
@@ -97,7 +95,13 @@ class VerificationEditText @JvmOverloads constructor(
         }
 
         textInputLayout.setEndIconOnClickListener {
-            Toast.makeText(context, "setEndIconOnClickListener", Toast.LENGTH_SHORT).show()
+            setLoading()
+
+            if (isCodeApplied) {
+                onDeleteCodeClick()
+            } else {
+                onApplyCodeClick(textInputLayout.editText?.text.toString())
+            }
         }
 
         progressBar = findViewById(R.id.progressBar)
@@ -114,11 +118,9 @@ class VerificationEditText @JvmOverloads constructor(
         isCodeApplied = true
 
         disableLoading()
-
         setError(null)
 
         setSuccessStyle()
-
         textInputLayout.helperText = message
     }
 
