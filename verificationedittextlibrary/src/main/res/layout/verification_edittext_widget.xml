@@ -29,9 +29,11 @@
             android:hint="Enter code"
             android:inputType="text"
             android:maxLines="1"
+            android:paddingEnd="42sp"
             android:singleLine="true"
             android:textColorHint="@drawable/hint_selector"
-            android:theme="@style/EditTextStyle" />
+            android:theme="@style/EditTextStyle"
+            tools:text="Some text will be here. Some text will be here. Some text will be here" />
     
     </com.google.android.material.textfield.TextInputLayout>
     
