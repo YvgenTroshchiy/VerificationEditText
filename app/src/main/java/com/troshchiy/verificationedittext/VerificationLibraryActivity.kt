@@ -3,14 +3,14 @@ package com.troshchiy.verificationedittext
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.verification_library_activity.*
 
 
-class MainActivity : AppCompatActivity() {
+class VerificationLibraryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.verification_library_activity)
 
         verificationEditText.onApplyCodeClick = {
             Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
