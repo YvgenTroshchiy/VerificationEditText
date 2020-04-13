@@ -1,3 +1,2 @@
-rootProject.name='VerificationEditText'
-include ':app'
-include ':verificationedittextlibrary'
+rootProject.name = 'VerificationEditText'
+include ':app', ':verificationedittextlibrary'
