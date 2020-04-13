@@ -88,7 +88,7 @@ class VerificationEditText @JvmOverloads constructor(
 
             if (after > 0) {
                 setDefaultStyle()
-                textInputLayout.setEndIconDrawable(R.drawable.ic_arrow_right)
+                textInputLayout.setEndIconDrawable(R.drawable.ic_btn_apply_circle_02)
             } else {
                 textInputLayout.endIconDrawable = null
             }
