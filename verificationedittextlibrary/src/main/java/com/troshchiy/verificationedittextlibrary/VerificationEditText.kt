@@ -88,7 +88,7 @@ class VerificationEditText @JvmOverloads constructor(
 
             if (after > 0) {
                 setDefaultStyle()
-                textInputLayout.setEndIconDrawable(R.drawable.ic_checkmark)
+                textInputLayout.setEndIconDrawable(R.drawable.ic_arrow_right)
             } else {
                 textInputLayout.endIconDrawable = null
             }
