@@ -31,7 +31,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColorHint="@drawable/hint_selector"
-            android:textCursorDrawable="@drawable/cursor_color" />
+            android:theme="@style/EditTextStyle" />
     
     </com.google.android.material.textfield.TextInputLayout>
     

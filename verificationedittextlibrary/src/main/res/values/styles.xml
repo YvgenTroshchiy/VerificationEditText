@@ -1,0 +1,7 @@
+<resources>
+    
+    <style name="EditTextStyle" parent="android:Widget.Material.EditText">
+        <item name="colorControlActivated">@color/green</item>
+    </style>
+
+</resources>
