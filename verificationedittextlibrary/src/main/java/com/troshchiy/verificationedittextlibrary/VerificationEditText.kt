@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
@@ -62,6 +63,8 @@ class VerificationEditText @JvmOverloads constructor(
         intArrayOf(-android.R.attr.state_enabled) to grayColor
     )
 
+    private lateinit var imgEndIcon: ImageView
+
     init {
         inflate(context, R.layout.verification_edittext_widget, this)
 
@@ -81,6 +84,8 @@ class VerificationEditText @JvmOverloads constructor(
 
         textInputLayout.setErrorTextColor(redStateList)
 
+        imgEndIcon = findViewById(R.id.img_end_icon)
+
         textInputLayout.editText?.doOnTextChanged { text, start, count, after ->
 //            debounceHandler.removeCallbacks(null)
 //            debounceHandler.postDelayed({
@@ -88,14 +93,15 @@ class VerificationEditText @JvmOverloads constructor(
 
             if (after > 0) {
                 setDefaultStyle()
-                textInputLayout.setEndIconDrawable(R.drawable.ic_arrow_right)
+                imgEndIcon.setImageResource(R.drawable.ic_arrow_right)
+                imgEndIcon.visibility = View.VISIBLE
             } else {
-                textInputLayout.endIconDrawable = null
+                imgEndIcon.visibility = View.GONE
             }
 //            }, 400)
         }
 
-        textInputLayout.setEndIconOnClickListener {
+        imgEndIcon.setOnClickListener {
             setLoading()
 
             if (isCodeApplied) {
@@ -112,7 +118,7 @@ class VerificationEditText @JvmOverloads constructor(
         setError(null)
         setDefaultStyle()
         textInputLayout.editText?.text = null
-        textInputLayout.endIconDrawable = null
+        imgEndIcon.visibility = View.GONE
     }
 
     fun setError(message: String?) {
@@ -120,6 +126,7 @@ class VerificationEditText @JvmOverloads constructor(
 
         disableLoading()
         textInputLayout.error = message
+        imgEndIcon.visibility = View.GONE
     }
 
     fun setSuccess(message: String?) {
@@ -134,24 +141,20 @@ class VerificationEditText @JvmOverloads constructor(
 
     private fun setDefaultStyle() {
         textInputLayout.boxStrokeColor = greenColor
-        textInputLayout.hintTextColor = greenHintStateList
-
-        textInputLayout.setEndIconTintList(greenEndIconTintList)
-
         textInputLayout.helperText = null
     }
 
     private fun setSuccessStyle() {
         textInputLayout.boxStrokeColor = grayColor
-        textInputLayout.hintTextColor = grayHintStateList
+        imgEndIcon.setImageResource(R.drawable.ic_close)
+        imgEndIcon.visibility = View.VISIBLE
 
-        textInputLayout.setEndIconTintList(grayEndIconTintList)
-        textInputLayout.setEndIconDrawable(R.drawable.ic_close)
     }
 
     fun setLoading() {
         setError(null)
-        textInputLayout.endIconDrawable = null
+
+        imgEndIcon.visibility = View.GONE
         textInputLayout.helperText = null
 
         textInputLayout.isEnabled = false
